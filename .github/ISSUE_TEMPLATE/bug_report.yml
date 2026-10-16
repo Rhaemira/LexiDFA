@@ -1,0 +1,55 @@
+name: Bug report
+description: Report a reproducible scanner, visualization, or UI issue
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve LexiDFA. Please avoid including personal data or signing credentials.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Scanner / tokenization
+        - DFA visualization
+        - Trace playback
+        - Tokens screen
+        - Benchmark lab
+        - Layout / accessibility
+        - Build / installation
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Xcode version, iOS version, and device or simulator model
+      placeholder: Xcode 26, iOS Simulator, iPhone 17 Pro
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      placeholder: 1. Open Scanner...\n2. Enter...\n3. Tap...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: sample
+    attributes:
+      label: Minimal source example (if relevant)
+      render: swift

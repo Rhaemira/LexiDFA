@@ -1,0 +1,31 @@
+name: Feature request
+description: Suggest an improvement to the learning experience
+title: "[Feature]: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem would this solve?
+      description: Describe the learning or workflow problem, not just the proposed UI.
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: Proposed solution
+    validations:
+      required: true
+  - type: dropdown
+    id: impact
+    attributes:
+      label: Primary impact
+      options:
+        - Compiler learning
+        - Scanner correctness
+        - Accessibility
+        - Visualization
+        - Performance measurement
+        - Developer experience
+    validations:
+      required: true

@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Test core and build iOS app
+    runs-on: macos-26
+    timeout-minutes: 30
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v5
+
+      - name: Report toolchain versions
+        run: |
+          swift --version
+          xcodebuild -version
+
+      - name: Run scanner and benchmark tests (Debug)
+        run: swift test
+
+      - name: Run scanner and benchmark tests (Release)
+        run: swift test -c release
+
+      - name: Build iOS Simulator app (Debug)
+        run: >-
+          xcodebuild
+          -project LexiDFA.xcodeproj
+          -scheme LexiDFA
+          -configuration Debug
+          -destination 'generic/platform=iOS Simulator'
+          CODE_SIGNING_ALLOWED=NO
+          build
+
+      - name: Build iOS Simulator app (Release)
+        run: >-
+          xcodebuild
+          -project LexiDFA.xcodeproj
+          -scheme LexiDFA
+          -configuration Release
+          -destination 'generic/platform=iOS Simulator'
+          CODE_SIGNING_ALLOWED=NO
+          build

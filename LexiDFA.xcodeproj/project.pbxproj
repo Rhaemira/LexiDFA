@@ -1,0 +1,326 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 71;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AA100001 /* LexiDFAApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA200001 /* LexiDFAApp.swift */; };
+		AA100002 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA200002 /* AppModel.swift */; };
+		AA100003 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA200003 /* Token.swift */; };
+		AA100004 /* DFA.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA200004 /* DFA.swift */; };
+		AA100005 /* ScanResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA200005 /* ScanResult.swift */; };
+		AA100006 /* ScannerEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA200006 /* ScannerEngine.swift */; };
+		AA100007 /* BenchmarkEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA200007 /* BenchmarkEngine.swift */; };
+		AA100008 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA200008 /* ContentView.swift */; };
+		AA100009 /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA200009 /* ScannerView.swift */; };
+		AA100010 /* DFAView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA200010 /* DFAView.swift */; };
+		AA100011 /* TraceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA200011 /* TraceView.swift */; };
+		AA100012 /* TokensView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA200012 /* TokensView.swift */; };
+		AA100013 /* PerformanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA200013 /* PerformanceView.swift */; };
+		AA100014 /* DFAFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA200014 /* DFAFlowView.swift */; };
+		AA100015 /* SourceCodeEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA200016 /* SourceCodeEditor.swift */; };
+		AA100021 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA200015 /* Assets.xcassets */; };
+		AA100022 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = AA200017 /* PrivacyInfo.xcprivacy */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		AA200001 /* LexiDFAApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexiDFAApp.swift; sourceTree = "<group>"; };
+		AA200002 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
+		AA200003 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
+		AA200004 /* DFA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DFA.swift; sourceTree = "<group>"; };
+		AA200005 /* ScanResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanResult.swift; sourceTree = "<group>"; };
+		AA200006 /* ScannerEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerEngine.swift; sourceTree = "<group>"; };
+		AA200007 /* BenchmarkEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BenchmarkEngine.swift; sourceTree = "<group>"; };
+		AA200008 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		AA200009 /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
+		AA200010 /* DFAView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DFAView.swift; sourceTree = "<group>"; };
+		AA200011 /* TraceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraceView.swift; sourceTree = "<group>"; };
+		AA200012 /* TokensView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokensView.swift; sourceTree = "<group>"; };
+		AA200013 /* PerformanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceView.swift; sourceTree = "<group>"; };
+		AA200014 /* DFAFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DFAFlowView.swift; sourceTree = "<group>"; };
+		AA200015 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AA200016 /* SourceCodeEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceCodeEditor.swift; sourceTree = "<group>"; };
+		AA200017 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		AA300001 /* LexiDFA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LexiDFA.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AA400001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AA500001 /* LexiDFA */ = {
+			isa = PBXGroup;
+			children = (
+				AA500002 /* App */,
+				AA500003 /* Models */,
+				AA500004 /* Scanner */,
+				AA500005 /* Concurrency */,
+				AA500006 /* Visualization */,
+				AA500007 /* Views */,
+				AA200015 /* Assets.xcassets */,
+				AA200017 /* PrivacyInfo.xcprivacy */,
+			);
+			path = LexiDFA;
+			sourceTree = "<group>";
+		};
+		AA500002 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				AA200001 /* LexiDFAApp.swift */,
+				AA200002 /* AppModel.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		AA500003 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				AA200003 /* Token.swift */,
+				AA200004 /* DFA.swift */,
+				AA200005 /* ScanResult.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		AA500004 /* Scanner */ = {
+			isa = PBXGroup;
+			children = (
+				AA200006 /* ScannerEngine.swift */,
+			);
+			path = Scanner;
+			sourceTree = "<group>";
+		};
+		AA500005 /* Concurrency */ = {
+			isa = PBXGroup;
+			children = (
+				AA200007 /* BenchmarkEngine.swift */,
+			);
+			path = Concurrency;
+			sourceTree = "<group>";
+		};
+		AA500006 /* Visualization */ = {
+			isa = PBXGroup;
+			children = (
+				AA200014 /* DFAFlowView.swift */,
+			);
+			path = Visualization;
+			sourceTree = "<group>";
+		};
+		AA500007 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				AA200008 /* ContentView.swift */,
+				AA200009 /* ScannerView.swift */,
+				AA200016 /* SourceCodeEditor.swift */,
+				AA200010 /* DFAView.swift */,
+				AA200011 /* TraceView.swift */,
+				AA200012 /* TokensView.swift */,
+				AA200013 /* PerformanceView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		AA900001 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AA300001 /* LexiDFA.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AA600001 /* LexiDFA */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA700001 /* Build configuration list for PBXNativeTarget "LexiDFA" */;
+			buildPhases = (
+				AA400002 /* Sources */,
+				AA400001 /* Frameworks */,
+				AA400003 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LexiDFA;
+			productName = LexiDFA;
+			productReference = AA300001 /* LexiDFA.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AA800001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2600;
+				LastUpgradeCheck = 2600;
+				TargetAttributes = {
+					AA600001 = {
+						CreatedOnToolsVersion = 26.0;
+					};
+				};
+			};
+			buildConfigurationList = AA700002 /* Build configuration list for PBXProject "LexiDFA" */;
+			compatibilityVersion = "Xcode 16.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = AA500001 /* LexiDFA */;
+			productRefGroup = AA900001 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AA600001 /* LexiDFA */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AA400003 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA100021 /* Assets.xcassets in Resources */,
+				AA100022 /* PrivacyInfo.xcprivacy in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AA400002 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA100001 /* LexiDFAApp.swift in Sources */,
+				AA100002 /* AppModel.swift in Sources */,
+				AA100003 /* Token.swift in Sources */,
+				AA100004 /* DFA.swift in Sources */,
+				AA100005 /* ScanResult.swift in Sources */,
+				AA100006 /* ScannerEngine.swift in Sources */,
+				AA100007 /* BenchmarkEngine.swift in Sources */,
+				AA100008 /* ContentView.swift in Sources */,
+				AA100009 /* ScannerView.swift in Sources */,
+				AA100010 /* DFAView.swift in Sources */,
+				AA100011 /* TraceView.swift in Sources */,
+				AA100012 /* TokensView.swift in Sources */,
+				AA100013 /* PerformanceView.swift in Sources */,
+				AA100014 /* DFAFlowView.swift in Sources */,
+				AA100015 /* SourceCodeEditor.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		AA710001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_CFBundleDisplayName = LexiDFA;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.amiraliyazdani.lexidfa;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		AA710002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_CFBundleDisplayName = LexiDFA;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.amiraliyazdani.lexidfa;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		AA710003 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		AA710004 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AA700001 /* Build configuration list for PBXNativeTarget "LexiDFA" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA710003 /* Debug */,
+				AA710004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AA700002 /* Build configuration list for PBXProject "LexiDFA" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA710001 /* Debug */,
+				AA710002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AA800001 /* Project object */;
+}
