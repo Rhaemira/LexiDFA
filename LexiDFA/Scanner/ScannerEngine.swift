@@ -23,33 +23,36 @@ enum SourceLanguage: String, CaseIterable, Identifiable, Sendable {
 
     var keywords: Set<String> {
         switch self {
-        case .swift:
-            return [
-                "associatedtype", "class", "deinit", "enum", "extension", "fileprivate", "func",
-                "import", "init", "inout", "internal", "let", "open", "operator", "private",
-                "protocol", "public", "rethrows", "static", "struct", "subscript", "typealias",
-                "var", "break", "case", "continue", "default", "defer", "do", "else", "fallthrough",
-                "for", "guard", "if", "in", "repeat", "return", "switch", "where", "while",
-                "as", "Any", "catch", "false", "is", "nil", "super", "self", "Self", "throw",
-                "throws", "true", "try", "async", "await", "actor", "some", "any", "yield",
-                "mutating", "nonmutating", "consuming", "borrowing", "package", "precedencegroup"
-            ]
-        case .cpp:
-            return [
-                "alignas", "alignof", "and", "and_eq", "asm", "auto", "bitand", "bitor", "bool",
-                "break", "case", "catch", "char", "char8_t", "char16_t", "char32_t", "class", "compl",
-                "concept", "const", "consteval", "constexpr", "constinit", "const_cast", "continue",
-                "co_await", "co_return", "co_yield", "decltype", "default", "delete", "do", "double",
-                "dynamic_cast", "else", "enum", "explicit", "export", "extern", "false", "float", "for",
-                "friend", "goto", "if", "inline", "int", "long", "mutable", "namespace", "new", "noexcept",
-                "not", "not_eq", "nullptr", "operator", "or", "or_eq", "private", "protected", "public",
-                "register", "reinterpret_cast", "requires", "return", "short", "signed", "sizeof", "static",
-                "static_assert", "static_cast", "struct", "switch", "template", "this", "thread_local",
-                "throw", "true", "try", "typedef", "typeid", "typename", "union", "unsigned", "using",
-                "virtual", "void", "volatile", "wchar_t", "while", "xor", "xor_eq"
-            ]
+        case .swift: return Self.swiftKeywords
+        case .cpp: return Self.cppKeywords
         }
     }
+
+    // Built once; `finishToken` checks these for every identifier.
+    private static let swiftKeywords: Set<String> = [
+        "associatedtype", "class", "deinit", "enum", "extension", "fileprivate", "func",
+        "import", "init", "inout", "internal", "let", "open", "operator", "private",
+        "protocol", "public", "rethrows", "static", "struct", "subscript", "typealias",
+        "var", "break", "case", "continue", "default", "defer", "do", "else", "fallthrough",
+        "for", "guard", "if", "in", "repeat", "return", "switch", "where", "while",
+        "as", "Any", "catch", "false", "is", "nil", "super", "self", "Self", "throw",
+        "throws", "true", "try", "async", "await", "actor", "some", "any", "yield",
+        "mutating", "nonmutating", "consuming", "borrowing", "package", "precedencegroup"
+    ]
+
+    private static let cppKeywords: Set<String> = [
+        "alignas", "alignof", "and", "and_eq", "asm", "auto", "bitand", "bitor", "bool",
+        "break", "case", "catch", "char", "char8_t", "char16_t", "char32_t", "class", "compl",
+        "concept", "const", "consteval", "constexpr", "constinit", "const_cast", "continue",
+        "co_await", "co_return", "co_yield", "decltype", "default", "delete", "do", "double",
+        "dynamic_cast", "else", "enum", "explicit", "export", "extern", "false", "float", "for",
+        "friend", "goto", "if", "inline", "int", "long", "mutable", "namespace", "new", "noexcept",
+        "not", "not_eq", "nullptr", "operator", "or", "or_eq", "private", "protected", "public",
+        "register", "reinterpret_cast", "requires", "return", "short", "signed", "sizeof", "static",
+        "static_assert", "static_cast", "struct", "switch", "template", "this", "thread_local",
+        "throw", "true", "try", "typedef", "typeid", "typename", "union", "unsigned", "using",
+        "virtual", "void", "volatile", "wchar_t", "while", "xor", "xor_eq"
+    ]
 }
 
 /// Explicit DFA + switch-case scanner. This is a teaching lexer, not a complete
@@ -202,7 +205,7 @@ struct ScannerEngine: Sendable {
                         appendState(.comment)
                         appendEvent(index: index, character: ch, state: .start, next: .comment, message: "// → line comment", kind: .transition)
                         index += 2
-                        while index < chars.count, chars[index] != "\n" {
+                        while index < chars.count, !chars[index].isNewline {
                             let commentChar = chars[index]
                             lexeme.append(commentChar)
                             appendEvent(index: index, character: commentChar, state: .comment, next: .comment, message: "Consume comment character", kind: .transition)
@@ -274,7 +277,7 @@ struct ScannerEngine: Sendable {
                         appendState(.preprocessor)
                         appendEvent(index: index, character: ch, state: .start, next: .preprocessor, message: "# at line start → directive", kind: .transition)
                         index += 1
-                        while index < chars.count, chars[index] != "\n" {
+                        while index < chars.count, !chars[index].isNewline {
                             let directiveChar = chars[index]
                             lexeme.append(directiveChar)
                             appendEvent(index: index, character: directiveChar, state: .preprocessor, next: .preprocessor, message: "Consume directive", kind: .transition)
@@ -378,7 +381,7 @@ struct ScannerEngine: Sendable {
                     index += 1
                     finishToken(type: .string, end: index)
                 } else if ch == "\\" {
-                    if index + 1 < chars.count, chars[index + 1] != "\n" {
+                    if index + 1 < chars.count, !chars[index + 1].isNewline {
                         lexeme.append(chars[index])
                         lexeme.append(chars[index + 1])
                         appendState(.string)
@@ -389,7 +392,7 @@ struct ScannerEngine: Sendable {
                         index += 1
                         failToken(message: "Dangling escape in string", end: index, eventIndex: index - 1, eventState: .string)
                     }
-                } else if ch == "\n" {
+                } else if ch.isNewline {
                     failToken(message: "Unterminated string", end: index, eventIndex: max(0, index - 1), eventState: .string)
                 } else {
                     lexeme.append(ch)
@@ -406,7 +409,7 @@ struct ScannerEngine: Sendable {
                     index += 1
                     finishToken(type: .characterLiteral, end: index)
                 } else if ch == "\\" {
-                    if index + 1 < chars.count, chars[index + 1] != "\n" {
+                    if index + 1 < chars.count, !chars[index + 1].isNewline {
                         lexeme.append(ch)
                         lexeme.append(chars[index + 1])
                         appendState(.characterLiteral)
@@ -417,7 +420,7 @@ struct ScannerEngine: Sendable {
                         index += 1
                         failToken(message: "Dangling escape in character literal", end: index, eventIndex: index - 1, eventState: .characterLiteral)
                     }
-                } else if ch == "\n" {
+                } else if ch.isNewline {
                     failToken(message: "Unterminated character literal", end: index, eventIndex: max(0, index - 1), eventState: .characterLiteral)
                 } else {
                     lexeme.append(ch)
@@ -477,7 +480,7 @@ struct ScannerEngine: Sendable {
         guard index > 0 else { return true }
         var cursor = index - 1
         while cursor >= 0 {
-            if chars[cursor] == "\n" { return true }
+            if chars[cursor].isNewline { return true }
             if !chars[cursor].isWhitespace { return false }
             if cursor == 0 { return true }
             cursor -= 1

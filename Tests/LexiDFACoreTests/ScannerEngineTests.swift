@@ -47,6 +47,33 @@ final class ScannerEngineTests: XCTestCase {
         XCTAssertEqual(tokens[1].type, .keyword)
     }
 
+    func testCRLFLineEndingsTerminateLineComments() {
+        // "\r\n" is a single Character in Swift, so it must not be compared against "\n".
+        let tokens = significantTokens("// note\r\nlet value = 7")
+
+        XCTAssertEqual(tokens.map(\.lexeme), ["// note", "let", "value", "=", "7"])
+        XCTAssertEqual(tokens.first?.type, .comment)
+    }
+
+    func testCRLFLineEndingsTerminateDirectivesAndAllowDirectiveOnNextLine() {
+        let source = "#include <string>\r\nint x;\r\n#define LIMIT 10\r\nint y;"
+        let tokens = scanner.scan(source, language: .cpp).tokens.filter { $0.type != .whitespace }
+
+        XCTAssertEqual(tokens.filter { $0.type == .preprocessor }.map(\.lexeme), ["#include <string>", "#define LIMIT 10"])
+        XCTAssertTrue(tokens.contains { $0.lexeme == "y" && $0.type == .identifier })
+        XCTAssertFalse(tokens.contains { $0.type == .unknown })
+    }
+
+    func testCRLFLineEndingsTerminateUnfinishedStringsAndCharacterLiterals() {
+        let stringResult = scanner.scan("let s = \"open\r\nlet t = 1")
+        XCTAssertTrue(stringResult.tokens.contains { $0.type == .unknown && $0.lexeme == "\"open" })
+        XCTAssertTrue(stringResult.tokens.contains { $0.lexeme == "t" && $0.type == .identifier })
+
+        let charResult = scanner.scan("char c = 'x\r\nint d;", language: .cpp)
+        XCTAssertTrue(charResult.tokens.contains { $0.type == .unknown && $0.lexeme == "'x" })
+        XCTAssertTrue(charResult.tokens.contains { $0.lexeme == "d" && $0.type == .identifier })
+    }
+
     func testRecognizesQuotedStringsAndEscapedQuotes() {
         let result = scanner.scan(#"let message = "say \"hi\"";"#)
         let stringToken = tryUnwrap(result.tokens.first { $0.type == .string })
